@@ -12,6 +12,8 @@ let colorArray = [
     "#3498DB",
     "#2980B9"
 ]
+let a = 6;
+console.log(a);
 
 
 // draw line function
