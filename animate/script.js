@@ -128,8 +128,11 @@ function animate() {
   drawGround();
 
   let y = canvas.height / 2 - players[currentFrame].height / 2;
+  let stopFunctionOne = true;
 
   //   frame One
+  // {
+  //   stopFunctionOne &&
   function frameOne() {
     ctx.drawImage(
       players[currentFrame],
@@ -160,6 +163,16 @@ function animate() {
       footballX += 180;
       currentFrame = 1;
       y += 20;
+      // text1
+      ctx.fillStyle = "red";
+      ctx.font = "bold 30px Arial";
+      let text = "Oh! I missed it";
+      ctx.fillText(text, canvas.width - 400, canvas.height - 400);
+      // text2
+      ctx.fillStyle = "red";
+      ctx.font = "bold 30px Arial";
+      let text2 = "💡 I Need to drink Prime!";
+      ctx.fillText(text2, canvas.width - 350, canvas.height - 360);
     }
 
     ctx.drawImage(
@@ -176,6 +189,7 @@ function animate() {
       requestAnimationFrame(animate);
     }, 300);
   }
+  // }
 
   //   frame Two
   function frameTwo() {
@@ -232,7 +246,6 @@ function animate() {
     footballX = x + 20;
     let footballY = y + players[currentFrame].height / 2;
 
-    // draw goalkeeper
     ctx.drawImage(
       goalKeeper,
       canvas.width - goalKeeper.width / 4,
@@ -248,8 +261,17 @@ function animate() {
       y < canvas.height - players[currentFrame].height / 3
     ) {
       footballX += 115;
-      currentFrame = 1;
+      currentFrame = 3;
       y += 20;
+
+      ctx.font = "30px Arial";
+      for (let i = 0; i < 20; i++) {
+        ctx.fillStyle = "red";
+        let text = "🎉GOAL!";
+        let textX = Math.random() * canvas.width;
+        let textY = Math.random() * canvas.height;
+        ctx.fillText(text, textX, textY);
+      }
     }
 
     ctx.drawImage(
@@ -287,26 +309,27 @@ function animate() {
     };
   }
 
-  //   setTimeout(function () {
-  //     frameOne();
-  //     setTimeout(function () {
-  //       shouldExitFrameOne = true;
-  //       frameTwo();
-  //       setTimeout(function () {
-  //         shouldExitFrameTwo = true;
-  //         frameThree();
-  //         setTimeout(function () {
-  //           shouldExitFrameThree = true;
-  //           frameFour();
-  //           setTimeout(function () {
-  //             shouldExitFrameFour = true;
-  //           }, 20000);
-  //         }, 15000);
-  //       }, 9500);
-  //     }, 1);
-  //   });
-  frameOne();
-  //   frameTwo();
+  setTimeout(function () {
+    frameOne();
+    setTimeout(function () {
+      shouldExitFrameOne = true;
+      frameTwo();
+      setTimeout(function () {
+        shouldExitFrameTwo = true;
+        frameThree();
+        setTimeout(function () {
+          shouldExitFrameThree = true;
+          frameFour();
+          setTimeout(function () {
+            shouldExitFrameFour = true;
+          }, 20000);
+        }, 15000);
+      }, 9500);
+    }, 1);
+  });
+
+  // frameOne();
+  // frameTwo();
   // frameThree();
   // frameFour();
 }
